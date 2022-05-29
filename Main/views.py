@@ -72,3 +72,20 @@ def categories(request):
             'form':form,
             'submitted':submitted
         })
+
+def search_items(request):
+    if request.method == 'POST':
+        searched = request.POST.get('searched')
+        items = Item.objects.filter(name__contains=searched)
+        return render(request, 'search_items.html', {
+            'searched':searched,
+            'items':items
+        })
+    else:
+        return render(request, 'search_items.html', {})
+
+def item(request, item_id):
+    item = Item.objects.get(pk=item_id)
+    return render(request, 'item.html', {
+        'item':item
+    })

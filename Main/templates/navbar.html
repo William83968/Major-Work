@@ -19,9 +19,10 @@
           </li>
         </ul>
         {% comment %} search bar {% endcomment %}
-        <form class="d-flex position-absolute start-50 w-25">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <form class="d-flex position-absolute start-50 w-25" method=POST action="{% url 'search_items' %}">
+          {% csrf_token %}
+          <input class="form-control me-2" type="search" placeholder="Search Items" aria-label="Search" name="searched">
+          <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
         {% comment %} profile image and pages {% endcomment %}
         <div class="dropdown me-5">
