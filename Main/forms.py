@@ -9,10 +9,10 @@ class CategoryForm(ModelForm):
         model = Category
         fields = ('name', 'house')
         labels={
-            'name':'',
-            'house':'',
+            'name':'Category Name',
+            'house':'House Name',
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control w-75', 'placeholder':'Category Name'}),
-            'house': forms.TextInput(attrs={'class': 'form-control w-75', 'placeholder':'House'})
+            'house':  forms.Select(attrs={'class':'form-select w-75', 'placeholder':'House Name'}),
         }
