@@ -29,7 +29,7 @@ class Item(models.Model):
     cost = models.FloatField()
     placement = models.CharField('Location', max_length=200, blank=True)
     expiry_date = models.DateField('Expiry Date') 
-    last_time_used = models.DateTimeField(auto_now_add=True)
+    last_time_used = models.DateTimeField(auto_now=True)
     account = models.URLField('associated account', blank=True)
     sold_price = models.DecimalField(decimal_places=2, max_digits=4, blank=True, null=True)
 

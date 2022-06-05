@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container d-flex flex-row">
+        <h1 class="mx-5">Manage Houses</h1>
+        <a type="button" class="btn btn-outline-primary position-absolute end-0 my-2 w-25 me-3" href={% url 'add_house' %}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill mb-1" >
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+            </svg>
+            Add House
+        </a>
+    </div>
+    <center>
+        {% for house in all_houses %}
+            <div class="card my-3 w-75">
+                <div class="card-title">
+                    <p class="ms-3">{{ house.name }}</p>
+                </div>
+                <div class="card-header">
+                    <li>Owner:{{ house.owner }}</li>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        {% if house.state %}
+                            <li>State:{{ house.state }}</li>
+                        {% endif %}
+                        {% if house.suburb %}
+                            <li>Suburb:{{ house.suburb }}</li>
+                        {% endif %}
+                        {% if house.street %}
+                            <li>Street:{{ house.street }}</li>
+                        {% endif %}
+                        {% if house.unit_number %}
+                            <li>Unit Number:{{ house.unit_number }}</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </center>
+{% endblock %}

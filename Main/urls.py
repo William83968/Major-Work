@@ -11,5 +11,11 @@ urlpatterns = [
     path('categories', views.categories, name="categories"),
     path('search_items', views.search_items, name="search_items"),
     path('item/<item_id>', views.item, name="item"),
-    path('update_category/<item_id>', views.update_category, name="update_category"),
+    path('update_category/<category_id>', views.update_category, name="update_category"),
+    path('update_item/<item_id>', views.update_item, name="update_item"),
+    path('add_item', views.add_item, name="add_item"),
+    path('delete_item/<item_id>', views.delete_item, name="delete_item"),
+    path('delete_category/<category_id>', views.delete_category, name="delete_category"),
+    path('add_house', views.add_house, name="add_house"),
+    path('list_house', views.list_house, name="list_house"),
 ]

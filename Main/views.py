@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from .models import Item, Category, House
-from .forms import CategoryForm
+from .forms import CategoryForm, HouseForm, ItemForm
 from django.http import HttpResponseRedirect
 
 # Create your views here.
@@ -51,27 +51,7 @@ def items(request):
         'item_list':item_list
     })
 
-def categories(request):
-    category_list = Category.objects.all()
-    submitted = False
-    if request.method == 'POST':
-        form = CategoryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/add_category?submitted=True')
-        return render(request, 'categorys.html', {
-            'category_list':category_list,
-            'form':form
-        })
-    else:
-        form = CategoryForm
-        if 'submitted' in request.GET:
-            submitted = True
-        return render(request, 'categorys.html', {
-            'category_list':category_list,
-            'form':form,
-            'submitted':submitted
-        })
+
 
 def search_items(request):
     if request.method == 'POST':
@@ -90,8 +70,64 @@ def item(request, item_id):
         'item':item
     })
 
-def update_category(request, item_id):
-    category = Category.objects.get(pk=item_id)
+def add_item(request):
+    submitted = False
+    if request.method == 'POST':
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_item?submitted=True')
+    else:
+        form = ItemForm
+        if 'submitted' in request.GET:
+            submitted = True
+
+    return render(request, 'add_item.html', {
+        'form':form,
+        'submitted':submitted
+    })
+
+def update_item(request, item_id):
+    item = Item.objects.get(pk=item_id)
+    form = ItemForm(request.POST or None, instance=item)
+    if form.is_valid():
+        form.save()
+        return redirect('items')
+    return render(request, 'update_item.html', {
+        'item':item,
+        'form':form
+    })
+
+def delete_item(request, item_id):
+    item = Item.objects.get(pk=item_id)
+    item.delete()
+    return redirect('items')
+
+
+def categories(request):
+    category_list = Category.objects.all()
+    submitted = False
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/categories?submitted=True')
+        return render(request, 'categorys.html', {
+            'category_list':category_list,
+            'form':form
+        })
+    else:
+        form = CategoryForm
+        if 'submitted' in request.GET:
+            submitted = True
+        return render(request, 'categorys.html', {
+            'category_list':category_list,
+            'form':form,
+            'submitted':submitted
+        })
+
+def update_category(request, category_id):
+    category = Category.objects.get(pk=category_id)
     form = CategoryForm(request.POST or None, instance=category)
     if form.is_valid():
         form.save()
@@ -100,3 +136,32 @@ def update_category(request, item_id):
         'category':category,
         'form':form
     })
+
+def delete_category(request, category_id):
+    category = Category.objects.get(pk=category_id)
+    category.delete()
+    return redirect('categories')
+
+def add_house(request):
+    submitted = False
+    if request.method == 'POST':
+        form = HouseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_house?submitted=True')
+    else:
+        form = HouseForm
+        if 'submitted' in request.GET:
+            submitted = True
+
+    return render(request, 'add_house.html', {
+        'form':form,
+        'submitted':submitted
+    })
+
+def list_house(request):
+    all_houses = House.objects.all()
+    return render(request, 'list_house.html', {
+        'all_houses':all_houses
+    })
+
