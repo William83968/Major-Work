@@ -17,23 +17,23 @@
                     <p class="ms-3">{{ house.name }}</p>
                 </div>
                 <div class="card-header">
-                    <li>Owner:{{ house.owner }}</li>
+                    <p>Owner: {{ house.owner }}</p>
+                    <a type="button" class="d-inline btn btn-outline-secondary w-25 mx-3" href={% url 'update_house' house.id %}>Edit House</a>
+                    <a type="button" class="d-inline btn btn-outline-danger w-25" href={% url 'delete_house' house.id %}>Delete House</a>
                 </div>
                 <div class="card-body">
-                    <ul>
-                        {% if house.state %}
-                            <li>State:{{ house.state }}</li>
-                        {% endif %}
-                        {% if house.suburb %}
-                            <li>Suburb:{{ house.suburb }}</li>
-                        {% endif %}
-                        {% if house.street %}
-                            <li>Street:{{ house.street }}</li>
-                        {% endif %}
-                        {% if house.unit_number %}
-                            <li>Unit Number:{{ house.unit_number }}</li>
-                        {% endif %}
-                    </ul>
+                    {% if house.state %}
+                        <p>State:{{ house.state }}</p>
+                    {% endif %}
+                    {% if house.suburb %}
+                        <p>Suburb:{{ house.suburb }}</p>
+                    {% endif %}
+                    {% if house.street %}
+                        <p>Street:{{ house.street }}</p>
+                    {% endif %}
+                    {% if house.unit_number %}
+                        <p>Unit Number:{{ house.unit_number }}</p>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}

@@ -165,3 +165,18 @@ def list_house(request):
         'all_houses':all_houses
     })
 
+def update_house(request, house_id):
+    house = House.objects.get(pk=house_id)
+    form = HouseForm(request.POST or None, instance=house)
+    if form.is_valid():
+        form.save()
+        return redirect('list_house')
+    return render(request, 'update_house.html', {
+        'house':house,
+        'form':form
+    })
+
+def delete_house(request, house_id):
+    house = House.objects.get(pk=house_id)
+    house.delete()
+    return redirect('list_house')

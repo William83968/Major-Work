@@ -4,7 +4,7 @@
     <div class="container-md shadow px-5 py-5 mt-3">
         {% if submitted %}
             <h3>Your House Was Submitted Successfully!</h3>
-            <a type="button" class="btn btn-outline-primary w-75" href={% url 'items' %}>Go back to item page</a>
+            <a type="button" class="btn btn-outline-primary w-75" href={% url 'list_house' %}>Go back to house page</a>
         {% else %}
                 <h1 class="my-3">Add House</h1>
                 <form action="" method=POST>
