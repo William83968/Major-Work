@@ -7,14 +7,16 @@ from .models import Category, Item, House
 class CategoryForm(ModelForm):
     class Meta:
         model = Category 
-        fields = ('name', 'house')
+        fields = ('name', 'house', 'description')
         labels={
             'name':'Category Name',
             'house':'House Name',
+            'description': 'Description',
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control w-75', 'placeholder':'Category Name'}),
-            'house':  forms.Select(attrs={'class':'form-select w-75', 'placeholder':'House Name'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Category Name'}),
+            'house':  forms.Select(attrs={'class':'form-select', 'placeholder':'House Name'}),
+            'description': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Description'}),
         }
 
 class ItemForm(ModelForm):

@@ -18,9 +18,10 @@ class House(models.Model):
 class Category(models.Model):
     name = models.CharField("category name", max_length=200)
     house = models.ForeignKey(House, on_delete=models.PROTECT)
+    description = models.TextField(blank=True)
 
     def __str__(self):
-        return self.name
+        return self.name 
 
 class Item(models.Model):
     name =  models.CharField('Item Name', max_length=200)
