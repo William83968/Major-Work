@@ -5,13 +5,49 @@ from .forms import CategoryForm, HouseForm, ItemForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
+#Import Calendar Stuff
+import calendar
+from calendar import HTMLCalendar
+from datetime import datetime
+import pytz
+
 # Import Pagination Stuff
 from django.core.paginator import Paginator
 
 
 # Create your views here.
-def home(request):
-    return render(request, 'home.html', {})
+def home(request, year=datetime.now().year, month=datetime.now().strftime('%B')):
+    # Initialise the user
+    name = "Mr.X"
+    if request.user != "AnonymousUser":
+        name = request.user
+
+    # Get the time
+    month_number = list(calendar.month_name).index(month)
+    month_number = int(month_number)
+    timezone = pytz.timezone("Australia/Sydney")
+    
+    # Format the time
+    cal = HTMLCalendar().formatmonth(year, month_number)
+    now = timezone.localize(datetime.now())
+    current_year = now.year
+    time = now.strftime('%I:%M:%S %p ')
+
+    # Get the number of each model
+    item_count = Item.objects.all().count()
+    category_count = Category.objects.all().count()
+    house_count = House.objects.all().count()
+
+    return render(request, "home.html", 
+                    {'name':name, 
+                    'year':year, 
+                    'month':month, 
+                    "cal":cal, 
+                    'current_year':current_year,
+                    'time':time,
+                    'item_count':item_count,
+                    'category_count':category_count,
+                    'house_count':house_count})
 
 def list_items_all(request, category_id):
     category_list = Category.objects.all()
@@ -81,7 +117,7 @@ def add_item(request):
         if form.is_valid():
             form.save()
             messages.success(request, ("Item added successfully"))
-            return HttpResponseRedirect('/add_item?submitted=True')
+            return HttpResponseRedirect('/main/add_item?submitted=True')
     else:
         form = ItemForm
         if 'submitted' in request.GET:
@@ -125,7 +161,7 @@ def categories(request):
         if form.is_valid():
             form.save()
             messages.success(request, ("Category added successfully"))
-            return HttpResponseRedirect('/categories?submitted=True')
+            return HttpResponseRedirect('/main/categories?submitted=True')
         return render(request, 'categories.html', {
             'category_list':category_list,
             'categories':categories,
@@ -179,7 +215,7 @@ def add_house(request):
         if form.is_valid():
             form.save()
             messages.success(request, ("House added successfully"))
-            return HttpResponseRedirect('/add_house?submitted=True')
+            return HttpResponseRedirect('/main/add_house?submitted=True')
     else:
         form = HouseForm
         if 'submitted' in request.GET:

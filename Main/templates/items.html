@@ -91,12 +91,14 @@
                             </div>
                         </div>
                     {% endfor %}
-                    <a type="button" class="btn btn-light position-absolute bottom-0 end-0 me-3 d-flex" style="width: 15%;" href="{% url 'add_item' %}">
-                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 20%;" fill="currentColor" class="bi bi-plus-circle-fill mx-3" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-                        </svg>
-                        <h1>Add item</h1>
-                    </a>
+                    <div class="container my-5">
+                        <a type="button" class="btn btn-light position-absolute top-0 end-0 me-3 d-flex my-5" style="width: 15%;height:5%;" href="{% url 'add_item' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="width: 20%;" fill="currentColor" class="bi bi-plus-circle-fill mx-3" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                            </svg>
+                            <h1>Add item</h1>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
