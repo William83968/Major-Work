@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container-md shadow px-5 py-5 mt-3">
-        {% if submitted %}
-            <h3>Your House Was Submitted Successfully!</h3>
-            <a type="button" class="btn btn-outline-primary w-75" href={% url 'list_house' %}>Go back to house page</a>
-        {% else %}
-                <h1 class="my-3">Add House</h1>
-                <form action="" method=POST>
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                </form>
-        {% endif %}
-    </div>
+    {% if user.is_authenticated %}
+        <div class="container-md shadow px-5 py-5 mt-3">
+            {% if submitted %}
+                <h3>Your House Was Submitted Successfully!</h3>
+                <a type="button" class="btn btn-outline-primary w-75" href={% url 'list_house' %}>Go back to house page</a>
+            {% else %}
+                    <h1 class="my-3">Add House</h1>
+                    <form action="" method=POST>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </form>
+            {% endif %}
+        </div>
+    {% else %}
+        {% include 'lockdown.html' %}
+    {% endif %}
 {% endblock %}

@@ -1,7 +1,7 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark  mb-lg-0">
     {% comment %} link to different pages {% endcomment %}
-    <div class="container-fluid">
+    <div class="container-fluid d-flex flex-row">
       <a class="navbar-brand" href="#"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -19,7 +19,7 @@
           </li>
         </ul>
         {% comment %} search bar {% endcomment %}
-        <form class="d-flex position-absolute start-50 w-25" method=POST action="{% url 'search_items' %}">
+        <form class="d-flex w-50 position-absolute top-50 start-50 translate-middle" method="POST" action="{% url 'search_items' %}">
           {% csrf_token %}
           <input class="form-control me-2" type="search" placeholder="Search Items" aria-label="Search" name="searched">
           <button class="btn btn-outline-primary" type="submit">Search</button>
@@ -27,10 +27,14 @@
         {% comment %} profile image and pages {% endcomment %}
         <div class="dropdown me-5">
             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="{% static 'images/user.png' %}" alt="mdo" width="32" height="32" class="rounded-circle">
+                <img src="{% static 'images/user.png' %}" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownUser1">
-              <li><a class="dropdown-item" href="{% url 'login_user' %} ">Login</a></li>
+                {% if user.is_authenticated %}
+                    <li><a class="dropdown-item" href="{% url 'logout_user' %} ">Logout</a></li>
+                {% else %}
+                    <li><a class="dropdown-item" href="{% url 'login_user' %} ">Login</a></li>
+                {% endif %}
             </ul>
         </div>
       </div>

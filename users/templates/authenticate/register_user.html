@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% include 'authenticate/registered_user.html' %}
+    {% else %}
+        <div class="container w-75 m-auto position-absolute top-50 start-50 translate-middle shadow px-5 py-5 rounded">
+            {% if form.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    There was an error with your form
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %} 
+            <h1 class="mb-4"> Register User</h1>
+            <form action="{% url 'register_user' %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="w-100 btn btn-lg btn-primary my-3" type="submit" value="Submit">Sign up</button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -2,33 +2,37 @@
 
 {% block content %}
     <center>
-        <div class="my-3 shadow w-75 rounded-pill">
-            <a href="{% url 'items' %}" class="btn btn-outline-primary my-5 w-50">
-                <h1>Hello {{ name }}!  </h1>
-                <p>As of {{ year }}/{{ month }} {{ time }}</p>
-                <center>
-                    <div class="card bg-dark">
-                        <div class="card-body">
-                                {{ cal|safe }}
+        {% if user.is_authenticated %}
+            <div class="my-3 shadow w-75 rounded-pill">
+                <a href="{% url 'items' %}" class="btn btn-outline-primary my-5 w-50">
+                    <h1>Hello {{ name }}!  </h1>
+                    <p>As of {{ year }}/{{ month }} {{ time }}</p>
+                    <center>
+                        <div class="card bg-dark">
+                            <div class="card-body">
+                                    {{ cal|safe }}
+                            </div>
                         </div>
-                    </div>
-                </center>
-            </a>
-        </div>
-        <h3>You have...</h3>
-        <div class="row w-50">
-            <div class="col-4">
-                <p class="fs-1">{{item_count}}</p>
-                items
+                    </center>
+                </a>
             </div>
-            <div class="col-4">
-                <p class="fs-1">{{category_count}}</p>
-                categories
+            <h3>You have...</h3>
+            <div class="row w-50">
+                <div class="col-4">
+                    <p class="fs-1">{{item_count}}</p>
+                    items
+                </div>
+                <div class="col-4">
+                    <p class="fs-1">{{category_count}}</p>
+                    categories
+                </div>
+                <div class="col-4">
+                    <p class="fs-1">{{house_count}}</p>
+                    houses
+                </div>
             </div>
-            <div class="col-4">
-                <p class="fs-1">{{house_count}}</p>
-                houses
-            </div>
-        </div>
+        {% else %}
+            {% include 'lockdown.html' %}
+        {% endif %}
     </center>
 {% endblock %}

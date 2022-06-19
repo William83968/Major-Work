@@ -42,6 +42,8 @@ class User(models.Model):
     last_name = models.CharField("last name", max_length=200)
     email = models.CharField("email", max_length=100)
     items = models.ManyToManyField(Item, blank=True)
+    country = models.CharField("country", max_length=200, default='Australia')
+    city = models.CharField("city", max_length=200, default='Sydney')
 
     def __str__(self):
         return self.first_name+' ' + self.last_name

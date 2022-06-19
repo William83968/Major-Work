@@ -29,7 +29,7 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
     
     # Format the time
     cal = HTMLCalendar().formatmonth(year, month_number)
-    now = timezone.localize(datetime.now())
+    now = datetime.now(pytz.timezone('Australia/Sydney'))
     current_year = now.year
     time = now.strftime('%I:%M:%S %p ')
 

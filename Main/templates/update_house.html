@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <center>
-        <div class="container-fluid shadow card py-5 w-75 my-4">
-            <h1>Update house</h1>
-            <form action="" method=POST>
-                {% csrf_token %}
-                {{ form.as_p }}
-                <br/>
-            <input type="submit" value="Update" class="btn btn-primary w-25">
-        </div>
-    </center>
+    {% if user.is_authenticated %}
+        <center>
+            <div class="container-fluid shadow card py-5 w-75 my-4">
+                <h1>Update house</h1>
+                <form action="" method=POST>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <br/>
+                <input type="submit" value="Update" class="btn btn-primary w-25">
+            </div>
+        </center>
+    {% else %}
+        {% include 'lockdown.html' %}
+    {% endif %}
 {% endblock %}

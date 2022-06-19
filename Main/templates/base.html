@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% comment %} <a href="https://www.flaticon.com/free-icons/gear" title="gear icons">Gear icons created by Freepik - Flaticon</a> {% endcomment %}
     <title>Homify</title>
+    <style>
+        body {background-color: #bfbfbf;}
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     
   </head>
   <body>
-    {% include 'navbar.html' %}
+    {% if user.is_authenticated %}
+        {% include 'navbar.html' %}
+    {% endif %}
         {% if messages %}
             {% for message in messages %}
                 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
