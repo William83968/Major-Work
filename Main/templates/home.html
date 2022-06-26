@@ -1,34 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <script>
+        function autoRefresh() {
+            window.location = window.location.href;
+        }
+        setInterval('autoRefresh()', 1000);
+    </script>
     <center>
         {% if user.is_authenticated %}
-            <div class="my-3 shadow w-75 rounded-pill">
-                <a href="{% url 'items' %}" class="btn btn-outline-primary my-5 w-50">
+            <div class="my-3 shadow w-75 rounded-5 py-5 px-5 bg-secondary bg-gradient bg-opacity-25">
+                <a href="{% url 'items' %}" class="btn btn-outline-primary my-5 w-100">
                     <h1>Hello {{ name }}!  </h1>
                     <p>As of {{ year }}/{{ month }} {{ time }}</p>
                     <center>
                         <div class="card bg-dark">
                             <div class="card-body">
-                                    {{ cal|safe }}
+                                    <p>{{ cal|safe }}</p>
                             </div>
                         </div>
                     </center>
                 </a>
-            </div>
-            <h3>You have...</h3>
-            <div class="row w-50">
-                <div class="col-4">
-                    <p class="fs-1">{{item_count}}</p>
-                    items
-                </div>
-                <div class="col-4">
-                    <p class="fs-1">{{category_count}}</p>
-                    categories
-                </div>
-                <div class="col-4">
-                    <p class="fs-1">{{house_count}}</p>
-                    houses
+                <div class="p-3 mb-4 bg-light rounded-pill my-3">
+                    <div class="container-fluid py-3">
+                        <header class="display-5 fw-bold my-2">You have...</header>
+                        <div class="row w-50">
+                            <div class="col-4">
+                                <p class="fs-1">{{item_count}}</p>
+                                items
+                            </div>
+                            <div class="col-4">
+                                <p class="fs-1">{{category_count}}</p>
+                                categories
+                            </div>
+                            <div class="col-4">
+                                <p class="fs-1">{{house_count}}</p>
+                                houses
+                            </div>
+                        </div>
+                        <h3 class="my-4">Items near expiry...</h3>
+                        <ul class="list-group w-50">
+                            {% for item in items %}
+                                {% if item.Near_Expiry == "Yes" %}
+                                    <a type="button" class="btn btn-outline-secondary my-1" href="{% url 'item' item.id %}">{{ item }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         {% else %}

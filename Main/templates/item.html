@@ -48,6 +48,9 @@
                     </center>
                 </div>
                 <div class="bg-light border rounded-3">
+                    {% if item.item_image %}
+                        <img class="card-img-top" src="{{item.item_image.url}}" alt="item">
+                    {% endif %}
                 </div>
             </div>
         </div>

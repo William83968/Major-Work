@@ -7,7 +7,7 @@
                 <a type="button" class="btn btn-outline-primary w-75" href="{% url 'items' %}">Go back to item page</a>
             {% else %}
                     <h1 class="my-3">Add Item</h1>
-                    <form action="" method=POST>
+                    <form action="" method=POST enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.as_p }}
                         <input type="submit" value="Submit" class="btn btn-primary">

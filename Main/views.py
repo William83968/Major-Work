@@ -33,6 +33,10 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
     current_year = now.year
     time = now.strftime('%I:%M:%S %p ')
 
+    # Item near Expiry
+    items = Item.objects.all()
+
+
     # Get the number of each model
     item_count = Item.objects.all().count()
     category_count = Category.objects.all().count()
@@ -47,7 +51,8 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
                     'time':time,
                     'item_count':item_count,
                     'category_count':category_count,
-                    'house_count':house_count})
+                    'house_count':house_count,
+                    'items':items})
 
 def list_items_all(request, category_id):
     category_list = Category.objects.all()
@@ -75,7 +80,7 @@ def list_items_h(request, house_id, category_id):
 def list_categories(request, house_id):
     category_list = Category.objects.filter(house__id=house_id)
     all_houses = House.objects.all()
-    item_list = Item.objects.all().order_by('name')
+    item_list = Item.objects.filter(category__house__id=house_id).order_by('name')
     return render(request, 'list_categories.html', {
         'category_list':category_list,
         'all_houses':all_houses,
@@ -113,7 +118,7 @@ def item(request, item_id):
 def add_item(request):
     submitted = False
     if request.method == 'POST':
-        form = ItemForm(request.POST)
+        form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, ("Item added successfully"))
@@ -130,7 +135,7 @@ def add_item(request):
 
 def update_item(request, item_id):
     item = Item.objects.get(pk=item_id)
-    form = ItemForm(request.POST or None, instance=item)
+    form = ItemForm(request.POST or None, request.FILES or None, instance=item)
     if form.is_valid():
         form.save()
         messages.success(request, ("Item updated successfully"))

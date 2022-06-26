@@ -22,7 +22,7 @@ class CategoryForm(ModelForm):
 class ItemForm(ModelForm):
     class Meta:
         model = Item
-        fields = ('name', 'category', 'cost', 'placement', 'expiry_date', 'account', 'sold_price')
+        fields = ('name', 'category', 'cost', 'placement', 'expiry_date', 'account', 'sold_price', 'item_image')
         labels={
             'name': 'Item Name',
             'category':'Item Category',
@@ -31,6 +31,7 @@ class ItemForm(ModelForm):
             'expiry_date':'Expiry Date',
             'account':'Account',
             'sold_price':'Sold Price',
+            'item_image': 'Image',
         }
         widgets={
             'name': forms.TextInput(attrs={'class': 'form-control w-75'}),

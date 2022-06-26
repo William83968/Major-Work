@@ -1,6 +1,7 @@
 from distutils.command.upload import upload
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 from datetime import date
 
 # Create your models here.
@@ -26,7 +27,7 @@ class Category(models.Model):
 class Item(models.Model):
     name =  models.CharField('Item Name', max_length=200)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    # image = models.ImageField('Image', blank=True)
+    item_image = models.ImageField(null=True, blank=True, upload_to="images/")
     cost = models.FloatField()
     placement = models.CharField('Location', max_length=200, blank=True)
     expiry_date = models.DateField('Expiry Date') 
@@ -36,6 +37,32 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def Days_till(self):
+        days_till = self.expiry_date - date.today()
+        days_till_stripped = str(days_till).split(",")[0]
+        return days_till_stripped
+
+    @property
+    def Is_Expired(self):
+        today = date.today()
+        if self.expiry_date < today:
+            expired = "Yes"
+        else:
+            expired = "No"
+        return expired
+
+    @property
+    def Near_Expiry(self):
+        days_till = self.expiry_date- datetime.timedelta(days=7)
+        today = date.today()
+        if days_till < today:
+            near = "Yes"
+        else:
+            near = "No"
+        return near
+
 
 class User(models.Model):
     first_name = models.CharField("first name", max_length=200)
@@ -47,5 +74,7 @@ class User(models.Model):
 
     def __str__(self):
         return self.first_name+' ' + self.last_name
+
+    
 
     
