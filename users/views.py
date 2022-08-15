@@ -36,7 +36,6 @@ def register_user(request):
             login(request, user)
             messages.success(request, ("Registration successful"))
             return redirect('home')
-            
     else:
         form = RegisterUserForm()
 

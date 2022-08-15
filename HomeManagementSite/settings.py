@@ -30,7 +30,7 @@ os.environ['EMAIL_HOST_USER'] = 'liuw6118@gmail.com'
 os.environ['EMAIL_HOST_PASSWORD'] = 'utrfpycrgnibnblk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
