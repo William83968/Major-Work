@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <center>
+        <div class="card w-75 rounded my-4">
+            <div class="card-header">
+                <img src="{{user.profile.image.url}}" class="card-img-top w-25" alt="item">
+                <h5 class="card-title">{{ user.username }}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">First Name: {{ user.first_name }}</p>
+                <p class="card-text">Last Name: {{ user.last_name }}</p>
+                <p class="card-text">Email: {{ user.email }}</p>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a type="button" class="d-flex btn btn-outline-secondary w-25 mx-3 my-3" href={% url 'update_user' %}>Update User</a>
+            <a type="button" class="d-flex btn btn-outline-danger w-25 mx-3" href={% url 'password_reset' %}>Reset Password</a>
+        </div>
+    </center>
+{% endblock %}

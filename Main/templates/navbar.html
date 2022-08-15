@@ -17,6 +17,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'categories' %}">Categories</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'list_house' %}">Houses</a>
+          </li>
         </ul>
         {% comment %} search bar {% endcomment %}
         <form class="d-flex w-50 position-absolute top-50 start-50 translate-middle" method="POST" action="{% url 'search_items' %}">
@@ -27,11 +30,12 @@
         {% comment %} profile image and pages {% endcomment %}
         <div class="dropdown me-5">
             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{% static 'images/user.png' %}" alt="mdo" width="32" height="32" class="rounded-circle">
+                <img src="{{user.profile.image.url}}" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownUser1">
                 {% if user.is_authenticated %}
                     <li><a class="dropdown-item" href="{% url 'logout_user' %} ">Logout</a></li>
+                    <li><a class="dropdown-item" href="{% url 'user_profile' user.id %} ">Profile</a></li>
                 {% else %}
                     <li><a class="dropdown-item" href="{% url 'login_user' %} ">Login</a></li>
                 {% endif %}
@@ -41,6 +45,5 @@
     </div>
   </nav>
 
-  
 
-  
+

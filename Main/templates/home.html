@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <script>
+    {% comment %} <script>
         function autoRefresh() {
             window.location = window.location.href;
         }
         setInterval('autoRefresh()', 1000);
-    </script>
+    </script> {% endcomment %}
     <center>
         {% if user.is_authenticated %}
             <div class="my-3 shadow w-75 rounded-5 py-5 px-5 bg-secondary bg-gradient bg-opacity-25">
