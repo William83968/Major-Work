@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django import forms
 from .models import Profile
 
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     def clean_username(self):
