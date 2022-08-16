@@ -26,13 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # note: the secret key and the
 SECRET_KEY = 'django-insecure-7iv#_c%u4gb@zxm*j&_krcmlm==1%$t74643@r0qci$6#gu%@3'
+PRODUCTION_KEY='7a45d52868ad272e9e31f35c2ab3c3bad5038eb3b200b0e9'
 os.environ['EMAIL_HOST_USER'] = 'liuw6118@gmail.com'
 os.environ['EMAIL_HOST_PASSWORD'] = 'utrfpycrgnibnblk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://hmanagement.herokuapp.com/']
 
 # Application definition
 
@@ -130,6 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
