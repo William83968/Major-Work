@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import RegisterUserForm, ProfileUpdateForm, UserUpdateForm
+from .forms import UserRegisterForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.models import User
 
 def login_user(request):
@@ -26,22 +26,17 @@ def logout_user(request):
     return render(request, 'authenticate/logout.html', {})
 
 def register_user(request):
-    if request.method == "POST":
-        form = RegisterUserForm(request.POST)
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            messages.success(request, ("Registration successful"))
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}!')
             return redirect('home')
     else:
-        form = RegisterUserForm()
+        form = UserRegisterForm()
+    return render(request, 'authenticate/register_user.html', {'form': form})
 
-    return render(request, 'authenticate/register_user.html', {
-        'form':form,
-    })
 
 def user_profile(request, user_id):
     user = User.objects.get(pk=user_id)

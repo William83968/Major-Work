@@ -6,7 +6,7 @@ from .models import Category, Item, House
 # Create a category form
 class CategoryForm(ModelForm):
     class Meta:
-        model = Category 
+        model = Category
         fields = ('name', 'house', 'description')
         labels={
             'name':'Category Name',
@@ -50,9 +50,9 @@ class HouseForm(ModelForm):
         labels = {
             'name': 'House Name',
             'owner': 'House Owner',
-            'state': 'State Address',
-            'suburb': 'Suburb Address',
-            'street': 'Street Address',
+            'state': 'State',
+            'suburb': 'Suburb',
+            'street': 'Street',
             'unit_number': 'Unit Number',
         }
         widgets = {

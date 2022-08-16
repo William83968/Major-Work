@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
@@ -11,11 +12,11 @@
                     There was an error with your form
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            {% endif %} 
+            {% endif %}
             <h1 class="mb-4"> Register User</h1>
-            <form action="{% url 'register_user' %}" method="post">
+            <form action="{% url 'register_user' %}" method="POST">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form|crispy }}
                 <button class="w-100 btn btn-lg btn-primary my-3" type="submit" value="Submit">Sign up</button>
             </form>
         </div>
