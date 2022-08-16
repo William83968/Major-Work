@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 import django_on_heroku
+import django_heroku
 import dj_database_url
 from decouple import config
 
@@ -155,4 +156,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 
-django_on_heroku.settings(locals())
+django_heroku.settings(locals())
