@@ -1,6 +1,6 @@
 import os
-os.environ['EMAIL_HOST_USER'] = 'liuw6118@gmail.com'
-os.environ['EMAIL_HOST_PASSWORD'] = 'oodwirsegoobujvu'
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
-print(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
+
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+PRODUCTION_KEY=os.environ.get('PRODUCTION_KEY')
+print(EMAIL_HOST_USER, PRODUCTION_KEY)
