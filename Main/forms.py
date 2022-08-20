@@ -28,8 +28,8 @@ class ItemForm(ModelForm):
             'category':'Item Category',
             'cost':'Item Cost',
             'placement':'Item Location',
-            'expiry_date':'Expiry Date',
-            'account':'Account',
+            'expiry_date':'Expiry Date/Reminder Date',
+            'account':'Account(For online items)',
             'sold_price':'Sold Price',
             'item_image': 'Image',
         }
