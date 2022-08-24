@@ -18,7 +18,7 @@ class House(models.Model):
 
 class Category(models.Model):
     name = models.CharField("category name", max_length=200)
-    house = models.ForeignKey(House, on_delete=models.PROTECT)
+    house = models.ForeignKey(House, on_delete=models.CASCADE)
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -26,7 +26,7 @@ class Category(models.Model):
 
 class Item(models.Model):
     name =  models.CharField('Item Name', max_length=200)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     item_image = models.ImageField(null=True, blank=True, upload_to="images/")
     cost = models.FloatField()
     placement = models.CharField('Location', max_length=200, blank=True)

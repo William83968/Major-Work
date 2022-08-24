@@ -11,17 +11,19 @@
                     {% csrf_token %}
                     <img class="mb-4" src="{% static 'images/homify-logo.png' %}" alt="" height="57">
                     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-                
-                    <div class="form-floating">
+
+                    <div class="form-floating my-2">
                         <input type="text" class="form-control" id="floatingInput" placeholder="username" name="username">
                         <label for="floatingInput">Username</label>
                     </div>
+
                     <div class="form-floating">
                         <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
                         <label for="floatingPassword">Password</label>
                     </div>
+                    <a class="form-text" href="{% url 'password_reset' %}">No password? Reset it here</a>
                     <button class="w-100 btn btn-lg btn-primary" type="submit" value="Submit">Sign in</button>
-                    
+
                 </form>
                 <div id="RegisterHelp" class="form-text mt-3">No account?</div>
                 <a class="w-100 btn btn-lg btn-primary" href={% url "register_user" %}>Sign up</a>

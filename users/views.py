@@ -25,26 +25,6 @@ def logout_user(request):
     messages.success(request, ('Logged out successfully'))
     return render(request, 'authenticate/logout.html', {})
 
-# def register_user(request):
-#     if request.method == "POST":
-#         form = RegisterUserForm(request.POST)
-#         if form.is_valid():
-#             print("yes, it's valid")
-#             form.save()
-#             print(form.cleaned_data)
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password1']
-#             user = authenticate(username=username, password=password)
-#             login(request, user)
-#             messages.success(request, ("Registration successful"))
-#             return redirect('home')
-#     else:
-#         print('Registration failed')
-#         form = RegisterUserForm()
-
-#     return render(request, 'authenticate/register_user.html', {
-#         'form':form,
-#     })
 def register_user(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
